@@ -1,0 +1,116 @@
+<div class="container-fluid" style="padding-top: 10px;">
+  <section *ngIf="isAdmin">
+    <div class="row">
+      <div class="col s12 m6 l6">
+        <!-- Dropdown Trigger -->
+        <a class='dropdown-trigger btn btn-100 pulse indigo lighten-2' href='#' data-target='dropdown1'>Drop users!</a>
+
+        <!-- Dropdown Structure -->
+        <ul id='dropdown1' class='dropdown-content'>
+          <li *ngFor="let user of users;"><a (click)="getVitalByUser(user.key)">{{user.username}}</a></li>
+         <!--  <li class="divider" tabindex="-1"></li> -->
+         <!--  <li><a href="#!">three</a></li>
+          <li><a href="#!"><i class="material-icons">view_module</i>four</a></li>
+          <li><a href="#!"><i class="material-icons">cloud</i>five</a></li> -->
+        </ul>
+      </div>
+    </div>
+
+    <div class="row">
+      <form class="login-form">
+        <div class="col s12 m3 l3">
+          <div class="row margin">
+            <div class="input-field col s12">
+              <input id="bodyTemperature" type="number" [(ngModel)]="vital.bodyTemperature" name="bodyTemperature">
+              <label for="bodyTemperature" class="center-align">Body Temperature</label>
+            </div>
+          </div>
+          <div class="row margin">
+            <div class="input-field col s12">
+              <input id="bodyPressure" type="number" [(ngModel)]="vital.bodyPressure" name="bodyPressure">
+              <label for="bodyPressure">Body Pressure</label>
+            </div>
+          </div>
+        </div>
+        <div class="col s12 m3 l3">
+          <div class="row margin">
+            <div class="input-field col s12">
+              <input id="heartRate" type="number" [(ngModel)]="vital.heartRate" name="heartRate">
+              <label for="heartRate" class="center-align">Heart Rate</label>
+            </div>
+          </div>
+          <div class="row margin">
+            <div class="input-field col s12">
+              <input id="glucose" type="number" [(ngModel)]="vital.glucose" name="glucose">
+              <label for="glucose">Glucose</label>
+            </div>
+          </div>
+        </div>
+        <div class="col s12 m3 l3">
+          <div class="row margin">
+            <div class="input-field col s12">
+              <input id="respiration" type="number" [(ngModel)]="vital.respiration" name="respiration">
+              <label for="respiration">Respiration</label>
+            </div>
+          </div>
+          <div class="row margin">
+            <div class="input-field col s12">
+              <input id="oxygenSaturation" type="number" [(ngModel)]="vital.oxygenSaturation" name="oxygenSaturation">
+              <label for="oxygenSaturation">O2Saturation</label>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s6 m3 l3">
+            <p class="margin medium-small"><a class="btn waves-effect waves-light border-round gradient-45deg-purple-deep-orange" (click)="saveVitalForUser()">Add Vital</a></p>
+          </div>
+        </div>
+      </form>
+    </div>
+  </section>
+  <section>
+    <div class="mat-elevation-z8">
+        <table mat-table [dataSource]="dataSource">
+      
+          <!-- Position Column -->
+          <ng-container matColumnDef="bodyTemperature">
+            <th mat-header-cell *matHeaderCellDef> Temp.. </th>
+            <td mat-cell *matCellDef="let element"> {{element.bodyTemperature}} </td>
+          </ng-container>
+      
+          <!-- Name Column -->
+          <ng-container matColumnDef="bodyPressure">
+            <th mat-header-cell *matHeaderCellDef> BP </th>
+            <td mat-cell *matCellDef="let element"> {{element.bodyPressure}} </td>
+          </ng-container>
+      
+          <!-- Weight Column -->
+          <ng-container matColumnDef="glucose">
+            <th mat-header-cell *matHeaderCellDef> Gluc. </th>
+            <td mat-cell *matCellDef="let element"> {{element.glucose}} </td>
+          </ng-container>
+      
+          <!-- Symbol Column -->
+          <ng-container matColumnDef="heartRate">
+            <th mat-header-cell *matHeaderCellDef> HR </th>
+            <td mat-cell *matCellDef="let element"> {{element.heartRate}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="respiration">
+            <th mat-header-cell *matHeaderCellDef> Resp.. </th>
+            <td mat-cell *matCellDef="let element"> {{element.respiration}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="oxygenSaturation">
+            <th mat-header-cell *matHeaderCellDef> O2 Satur.. </th>
+            <td mat-cell *matCellDef="let element"> {{element.oxygenSaturation}} </td>
+          </ng-container>
+      
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+      
+        <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+      </div>
+  </section>
+</div>
